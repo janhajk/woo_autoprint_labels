@@ -13,7 +13,7 @@ var WooCommerce = new WooCommerceAPI({
 
 
 
-/ Cron
+// Cron
 setInterval(function() {
     // your function
 }, 5000);
