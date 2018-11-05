@@ -14,25 +14,28 @@ var WooCommerce = new WooCommerceAPI({
 
 var printed = [];
 
-
-   WooCommerce.get('orders?status=processing', function(err, data, res) {
-     console.log(res);
-     var d = JSON.parse(res);
-     for(var i in d) {
-        console.log(d[i].id);
-        console.log(d[i].shipping);
-        var label = '';
-        label += encodeURIComponent(d[i].shipping.first_name);
-        label += "%20" + encodeURIComponent(d[i].shipping.last_name);
-        label += "%0A" + encodeURIComponent(d[i].shipping.company);
-        label += "%0A" + encodeURIComponent(d[i].shipping.address_1);
-        label += "%0A" + encodeURIComponent(d[i].shipping.address_2);
-        label += "%0A" + encodeURIComponent(d[i].shipping.postcode);
-        label += "%20" + encodeURIComponent(d[i].shipping.city);
-        print_ql(label);
-     }
-   });
-
+setInterval(function() {
+      WooCommerce.get('orders?status=processing', function(err, data, res) {
+         console.log(res);
+         var d = JSON.parse(res);
+         for(var i in d) {
+            if(printed.indexOf(d[i].id) != -1) {
+               console.log(d[i].id);
+               console.log(d[i].shipping);
+               var label = '';
+               label += encodeURIComponent(d[i].shipping.first_name);
+               label += "%20" + encodeURIComponent(d[i].shipping.last_name);
+               label += "%0A" + encodeURIComponent(d[i].shipping.company);
+               label += "%0A" + encodeURIComponent(d[i].shipping.address_1);
+               label += "%0A" + encodeURIComponent(d[i].shipping.address_2);
+               label += "%0A" + encodeURIComponent(d[i].shipping.postcode);
+               label += "%20" + encodeURIComponent(d[i].shipping.city);
+               print_ql(label);
+               printed.push(d[i].id);
+            }
+         }
+      });
+   }, 1000*60*30);
 
 var print_ql = function(text) {
    var host = config.ql_api;
@@ -45,10 +48,3 @@ var print_ql = function(text) {
       console.log(body.explanation);
    });
 };
-
-// text=Jan+Sch%C3%A4r%0ABr%C3%BChlstrasse+8%0A%0A4415+Lausen%0ASchweiz&
-
-// Cron
-//setInterval(function() {
-//
-//}, 5000);
