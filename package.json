@@ -1,5 +1,5 @@
 {
-    "name": "Woo Auto-Labeler",
+    "name": "WooAuto-Labeler",
     "description": "Chechs via WooCommerce API for new Orders and prints Adresslabel on Brother QL Printer",
     "version": "0.0.1",
     "private": true,
