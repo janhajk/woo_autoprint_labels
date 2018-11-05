@@ -8,14 +8,14 @@ var WooCommerce = new WooCommerceAPI({
   consumerKey: config.consumerKey,
   consumerSecret: config.consumerSecret,
   wpAPI: true,
-  version: 'wc/v1'
+  version: 'wc/v3'
 });
 
 
 
 // Cron
 setInterval(function() {
-   WooCommerce.get('orders', {"status":"processing"}, function(err, data, res) {
+   WooCommerce.get('orders', {status:'processing'}, function(err, data, res) {
      console.log(res);
    });
 }, 5000);
