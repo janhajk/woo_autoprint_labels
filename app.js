@@ -15,5 +15,7 @@ var WooCommerce = new WooCommerceAPI({
 
 // Cron
 setInterval(function() {
-    // your function
+   WooCommerce.get('orders', function(err, data, res) {
+     console.log(res);
+   });
 }, 5000);
