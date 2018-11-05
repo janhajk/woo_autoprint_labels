@@ -8,7 +8,7 @@ var WooCommerce = new WooCommerceAPI({
   consumerKey: config.consumerKey,
   consumerSecret: config.consumerSecret,
   wpAPI: true,
-  version: 'wv/v1'
+  version: 'wc/v1'
 });
 
 
