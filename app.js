@@ -21,7 +21,7 @@ var printed = [];
      for(var i in d) {
         console.log(d[i].id);
         console.log(d[i].shipping);
-        print_ql();
+        print_ql(d[i].shipping.first_name + ' ' + d[i].shipping.last_name + '/n' + d[i].shipping.address_1 + '/n' + d[i].shipping.postcode + ' ' + d[i].shipping.city);
      }
    });
 
@@ -29,8 +29,7 @@ var printed = [];
 var print_ql = function(text) {
    var host = config.ql_api;
    var full_cmd = host + "text?font_size=50&font_family=Minion%20Pro%20(%20Semibold%20)&text=" + text;
-   request(full_cmd, {
-   }, (err, res, body) = > {
+   request(full_cmd, function(err, res, body) {
       if(err) {
          return console.log(err);
       }
