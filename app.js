@@ -14,14 +14,16 @@ var WooCommerce = new WooCommerceAPI({
 var printed = [];
 
 
-
-// Cron
-setInterval(function() {
    WooCommerce.get('orders?status=processing', function(err, data, res) {
      console.log(res);
+     var d = JSON.parse(res);
      for(var i in res) {
         console.log(res[i].id);
         console.log(res[i].shipping);
      }
    });
+
+// Cron
+setInterval(function() {
+
 }, 5000);
