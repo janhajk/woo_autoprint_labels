@@ -15,7 +15,7 @@ var WooCommerce = new WooCommerceAPI({
 
 // Cron
 setInterval(function() {
-   WooCommerce.get('orders', {status:'processing'}, function(err, data, res) {
+   WooCommerce.get('orders?status=processing', function(err, data, res) {
      console.log(res);
    });
 }, 5000);
