@@ -17,9 +17,9 @@ var printed = [];
    WooCommerce.get('orders?status=processing', function(err, data, res) {
      console.log(res);
      var d = JSON.parse(res);
-     for(var i in res) {
-        console.log(res[i].id);
-        console.log(res[i].shipping);
+     for(var i in d) {
+        console.log(d[i].id);
+        console.log(d[i].shipping);
      }
    });
 
