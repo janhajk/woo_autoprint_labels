@@ -21,14 +21,22 @@ var printed = [];
      for(var i in d) {
         console.log(d[i].id);
         console.log(d[i].shipping);
-        print_ql(d[i].shipping.first_name + ' ' + d[i].shipping.last_name + '/n' + d[i].shipping.address_1 + '/n' + d[i].shipping.postcode + ' ' + d[i].shipping.city);
+        var label = '';
+        label += encodeURIComponent(d[i].shipping.first_name);
+        label += "%20" + encodeURIComponent(d[i].shipping.last_name);
+        label += "%0A" + encodeURIComponent(d[i].shipping.company);
+        label += "%0A" + encodeURIComponent(d[i].shipping.address_1);
+        label += "%0A" + encodeURIComponent(d[i].shipping.address_2);
+        label += "%0A" + encodeURIComponent(d[i].shipping.postcode);
+        label += "%20" + encodeURIComponent(d[i].shipping.city);
+        print_ql(label);
      }
    });
 
 
 var print_ql = function(text) {
    var host = config.ql_api;
-   var full_cmd = host + "text?font_size=50&font_family=Minion%20Pro%20(%20Semibold%20)&text=" + text;
+   var full_cmd = host + "text?font_family=DejaVu+Sans+(Bold)&font_size=70&label_size=38&align=left&orientation=rotated&margin_top=24&margin_bottom=45&margin_left=35&margin_right=35&text=" + text;
    request(full_cmd, function(err, res, body) {
       if(err) {
          return console.log(err);
@@ -37,6 +45,8 @@ var print_ql = function(text) {
       console.log(body.explanation);
    });
 };
+
+// text=Jan+Sch%C3%A4r%0ABr%C3%BChlstrasse+8%0A%0A4415+Lausen%0ASchweiz&
 
 // Cron
 //setInterval(function() {
