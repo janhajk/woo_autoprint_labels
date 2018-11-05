@@ -11,11 +11,17 @@ var WooCommerce = new WooCommerceAPI({
   version: 'wc/v3'
 });
 
+var printed = [];
+
 
 
 // Cron
 setInterval(function() {
    WooCommerce.get('orders?status=processing', function(err, data, res) {
      console.log(res);
+     for(var i in res) {
+        console.log(res[i].id);
+        console.log(res[i].shipping);
+     }
    });
 }, 5000);
